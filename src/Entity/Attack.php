@@ -27,6 +27,21 @@ class Attack
     #[ORM\ManyToOne(targetEntity: Type::class, inversedBy: 'Attacks')]
     private $type;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private $Category;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private $Power;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private $Accuracy;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private $PP;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private $MakesContact;
+
     public function __construct()
     {
         $this->pokemon = new ArrayCollection();
@@ -96,6 +111,66 @@ class Attack
     public function setType(?Type $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getCategory(): ?string
+    {
+        return $this->Category;
+    }
+
+    public function setCategory(string $Category): self
+    {
+        $this->Category = $Category;
+
+        return $this;
+    }
+
+    public function getPower(): ?string
+    {
+        return $this->Power;
+    }
+
+    public function setPower(string $Power): self
+    {
+        $this->Power = $Power;
+
+        return $this;
+    }
+
+    public function getAccuracy(): ?string
+    {
+        return $this->Accuracy;
+    }
+
+    public function setAccuracy(string $Accuracy): self
+    {
+        $this->Accuracy = $Accuracy;
+
+        return $this;
+    }
+
+    public function getPP(): ?string
+    {
+        return $this->PP;
+    }
+
+    public function setPP(string $PP): self
+    {
+        $this->PP = $PP;
+
+        return $this;
+    }
+
+    public function getMakesContact(): ?string
+    {
+        return $this->MakesContact;
+    }
+
+    public function setMakesContact(string $MakesContact): self
+    {
+        $this->MakesContact = $MakesContact;
 
         return $this;
     }
