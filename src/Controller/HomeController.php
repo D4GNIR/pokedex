@@ -42,4 +42,14 @@ class HomeController extends AbstractController
             'pagination' => $pagination,
         ]);
     }
+
+        // Récupérer un jeu avec son slug
+        #[Route('/Pokemon/{id}', name: 'show_pokemon')]
+        public function getOnePokemonById(int $id): Response
+        {
+            $pokemonEntity = $this->pokemonRepository->find($id);
+            return $this->render('home/show.html.twig', [
+                'myPokemon' => $pokemonEntity,
+            ]);
+        }
 }

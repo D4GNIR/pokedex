@@ -1,0 +1,32 @@
+{% extends 'base-front.html.twig' %}
+
+{% block title %}{{ myPokemon.Name }}{% endblock %}
+
+{% block body %}
+<div class="container">
+<div class="text-center">
+    <h1>{{ myPokemon.Name }} #{{ myPokemon.numeroNationnal }}</h1>
+    <img src="{{ myPokemon.picture }}" alt="">
+    <h3>Pokedex Definition</h3>
+    <p>{{ myPokemon.Description }} </p>
+</div>
+
+
+<div class="col-sm-12 col-md-6 col-lg-6">
+    <p>Ici les type</p>
+</div>
+<div class="col-sm-12 col-md-6 col-lg-6">
+    <p>Ici les attaques</p>
+</div>
+
+
+    <pre>
+        {{ dump(myPokemon) }}
+    </pre>
+
+</div>
+{% endblock %}
+
+{% block footer %}
+           
+{% endblock %}

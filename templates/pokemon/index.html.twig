@@ -1,0 +1,47 @@
+{% extends 'base-admin.html.twig' %}
+
+{% block title %}Pokemon index{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Pokemon index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="col-1">Id</th>
+                <th class="col-1">Name</th>
+                <th class="col-4">Description</th>
+                <th class="col-1">NumeroNationnal</th>
+                <th class="col-3">Picture</th>
+                <th class="col-2">actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for pokemon in pokemon %}
+            <tr>
+                <td class="col-1">{{ pokemon.id }}</td>
+                <td class="col-1">{{ pokemon.Name }}</td>
+                <td class="col-4">{{ pokemon.Description }}</td>
+                <td class="col-1">{{ pokemon.numeroNationnal }}</td>
+                <td class="col-3"><img src="{{ pokemon.picture }}" alt="" class="img-fluid"></td>
+                <td class="col-2">
+                    <a href="{{ path('app_pokemon_show', {'id': pokemon.id}) }}">show</a>
+                    <a href="{{ path('app_pokemon_edit', {'id': pokemon.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_pokemon_new') }}">Create new</a>
+
+    <div class="mb-3">
+        {{ knp_pagination_render(pokemon) }}
+    </div>
+</div>
+{% endblock %}

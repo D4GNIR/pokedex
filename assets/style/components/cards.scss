@@ -1,0 +1,43 @@
+.col-lg-30{
+  flex: 0 0 auto;
+  width: 30%;
+}
+
+
+.myCard {
+    text-align: center;
+    border: solid 1px black;
+    background-color: rgba(211, 211, 211, 0.411);
+
+    
+    .container-image {
+      height: 320px;
+      position: relative;
+  
+      &:hover {
+        transition: ease, 0.20s;
+        cursor: pointer;
+        transform: scale(1.05);
+      }
+  
+      > img {
+        height: 97%;
+        width: 97%;
+        border-radius: 15px;
+      }
+    }  
+  }
+  
+
+  
+
+  
+
+
+  
+
+  
+  
+  
+  
+  

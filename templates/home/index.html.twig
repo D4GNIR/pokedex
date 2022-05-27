@@ -1,16 +1,20 @@
-{% extends 'base.html.twig' %}
+{% extends 'base-front.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}PikaDex{% endblock %}
 
 {% block body %}
 <div class="container my-3">
     <div class="row">
         {% for pokemon in pagination %}
-        <div class="col-12 col-md-6 col-lg-4">
+        <div class="myCard col-12 col-md-5 col-lg-30 m-2">
             <h3>{{ pokemon.name }}</h3>
-            <img src="{{pokemon.picture}}" class="img-fluid" alt="">
+            <a href="{{ path('show_pokemon', {'id': pokemon.id}) }}"><img src="{{pokemon.picture}}" class="container-image" alt=""></a>
         </div>
         {% endfor %}
     </div>
+</div>
+
+<div class="mb-3">
+    {{ knp_pagination_render(pagination) }}
 </div>
 {% endblock %}
