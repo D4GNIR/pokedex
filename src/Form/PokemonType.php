@@ -68,6 +68,7 @@ class PokemonType extends AbstractType
                 'class' => Attack::class,
                 'choice_label' => 'label',
                 'multiple' => true,
+                'expanded' => true,
                 'attr' => [
                     'class' => 'col-3'
                 ]                  

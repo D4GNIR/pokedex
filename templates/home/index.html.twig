@@ -6,7 +6,7 @@
 <div class="container my-3">
     <div class="row">
         {% for pokemon in pagination %}
-        <div class="myCard col-12 col-md-5 col-lg-30 m-2">
+        <div class="myCard col-sm-12 col-md-5 col-lg-30 m-2">
             <h3>{{ pokemon.name }}</h3>
             <a href="{{ path('show_pokemon', {'id': pokemon.id}) }}"><img src="{{pokemon.picture}}" class="container-image" alt=""></a>
         </div>
