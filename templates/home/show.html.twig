@@ -3,24 +3,56 @@
 {% block title %}{{ myPokemon.Name }}{% endblock %}
 
 {% block body %}
-<div class="container">
-    <div class="text-center">
-        <h1>{{ myPokemon.Name }} #{{ myPokemon.numeroNationnal }}</h1>
+<div class="container text-center">
+<h1>{{ myPokemon.Name }} #{{ myPokemon.numeroNationnal }}</h1>
+<div class="row">
+    <div class="col-6">
         <img src="{{ myPokemon.picture }}" alt="">
         <h3>Pokedex Definition</h3>
         <p>{{ myPokemon.Description }} </p>
+        <div class="d-flex justify-content-center">
+            {% for type in myPokemon.types %}
+            <p class="{{ type.label }} type me-2 ms-2">{{ type.label }} </p>
+            {% endfor %}
+        </div>
     </div>
 
-    <div class="col-sm-12 col-md-6 col-lg-6">
-        <p>Ici les type</p>
-    </div>
-    <div class="col-sm-12 col-md-6 col-lg-6">
-        <p>Ici les attaques</p>
+    <div class="col-6">
+        <table class="table table-striped">
+            <tr class="row">
+                <td class="col-3"><b>Name</b></td>
+                <td class="col-3"><b>Type</b></td>
+                <td class="col-2"><b>Category</b></td>
+                <td class="col-2"><b>Power</b></td>
+                <td class="col-2"><b>Accuracy</b></td>
+            </tr>
+
+            {% for attack in myPokemon.attacks %}
+            <tr class="row">
+                <td class="col-3">
+                    <p>{{ attack.label }}</p>
+                </td>
+                <td class="col-3">
+                    <p class="{{ attack.type.label }} type">{{ attack.type.label }}</p>
+                </td>
+                <td class="col-2">
+                    <p>{{ attack.category }}</p>
+                </td>
+                <td class="col-2">
+                    <p>{{ attack.power }}</p>
+                </td>
+                <td class="col-2">
+                    <p>{{ attack.accuracy }}</p>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+
     </div>
 
-    <pre>
-        {{ dump(myPokemon) }}
-    </pre>
+</div>
+
+
 
 </div>
 {% endblock %}
