@@ -1,0 +1,13 @@
+.btn-pokemon {
+    color: black;
+    background: linear-gradient(25deg, #ffffff 50%, #ec240a 50%);
+    border-color: black;
+
+    &:hover{
+        background-color: darken($color: rgb(245, 3, 3), $amount: 80);
+    }
+}
+
+
+
+

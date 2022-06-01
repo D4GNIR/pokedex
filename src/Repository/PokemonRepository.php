@@ -42,9 +42,11 @@ class PokemonRepository extends ServiceEntityRepository
     public function getQbAll()
     {
         return $this->createQueryBuilder('p');
-        // ->orderBy('p.createdAt', 'DESC');
 
     }
+    
+
+
 
 //    /**
 //     * @return Pokemon[] Returns an array of Pokemon objects

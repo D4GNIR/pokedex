@@ -1,0 +1,73 @@
+{% extends 'base-front.html.twig' %}
+
+{% block title %}Hello AttacksController!{% endblock %}
+
+{% block body %}
+<div class="container text-center">
+<h1>All Attacks</h1>
+
+    {{ form_start(form) }}
+    <div class="row">
+        <div class="col-6">
+            {{form_row(form.power)}}
+        </div>
+        <div class="col-6">
+            {{form_row(form.accuracy)}}
+        </div>
+        <div class="col-6">
+            {{form_row(form.category)}}
+        </div>
+        <div class="col-6">
+            {{form_row(form.makesContact)}}
+        </div>
+    </div>
+    {{ form_end(form) }}
+
+    <div class="col-12">
+        <table class="table table-striped">
+            <tr class="row">
+                <td class="col-2"><b>Name</b></td>
+                <td class="col-2"><b>Type</b></td>
+                <td class="col-2"><b>Category</b></td>
+                <td class="col-1"><b>Power</b></td>
+                <td class="col-2"><b>Accuracy</b></td>
+                <td class="col-1"><b>PP</b></td>
+                <td class="col-2"><b>Makes contact?</b></td>
+            </tr>
+
+            {% for attack in pagination %}
+            <tr class="row">
+                <td class="col-2">
+                    <p>{{ attack.label }}</p>
+                </td>
+                <td class="col-2">
+                    <p class="{{ attack.type.label }} type">{{ attack.type.label }}</p>
+                </td>
+                <td class="col-2">
+                    <p>{{ attack.category }}</p>
+                </td>
+                <td class="col-1">
+                    <p>{{ attack.power }}</p>
+                </td>
+                <td class="col-2">
+                    <p>{{ attack.accuracy }}</p>
+                </td>
+                <td class="col-1">
+                    <p>{{ attack.PP }}</p>
+                </td>
+                <td class="col-2">
+                    <p>{{ attack.MakesContact }}</p>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+<div class="mb-3">
+    {{ knp_pagination_render(pagination) }}
+</div>
+
+</div>
+
+{% endblock %}

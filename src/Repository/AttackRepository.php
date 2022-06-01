@@ -39,6 +39,59 @@ class AttackRepository extends ServiceEntityRepository
         }
     }
 
+    public function getAttacksByPokemonId($id)
+    {
+        return $this->createQueryBuilder('a')
+        ->join('a.pokemon', 'pokemon')
+        ->where('pokemon.id = :id')
+        ->setParameter(':id', $id)
+        ->setMaxResults(9)
+        ->getQuery()
+        ->getResult();
+
+    }
+
+    public function getQbAll()
+    {
+        return $this->createQueryBuilder('a');
+
+    }
+
+    public function updateQbByData($qb, $datas)
+    {
+            if(count($datas['types']) > 0){
+                $qb
+                ->join('a.type', 'type')
+                ->andWhere('type IN (:type_array)')
+                ->setParameter('type_array', $datas['types']);
+            }
+            if(isset($datas['power'])){
+                $qb        
+                ->andWhere('a.Power >= :power')
+                ->setParameter('power', $datas['power']);
+            }
+            if(isset($datas['accuracy'])){
+                $qb        
+                ->andWhere('a.Accuracy >= :accuracy')
+                ->setParameter('accuracy', $datas['accuracy']);
+            }
+            if(isset($datas['category']) && $datas['category']!= 'null'){
+                $qb        
+                ->andWhere('a.Category LIKE :category')
+                ->setParameter('category', '%'.$datas['category'].'%');
+            } 
+            if(isset($datas['makesContact']) && $datas['makesContact']!= 'null'){
+                $qb        
+                ->andWhere('a.MakesContact LIKE :makesContact')
+                ->setParameter('makesContact', '%'.$datas['makesContact'].'%');
+            } 
+
+           
+
+
+            return $qb;
+    }
+
 //    /**
 //     * @return Attack[] Returns an array of Attack objects
 //     */

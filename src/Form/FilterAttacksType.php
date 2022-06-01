@@ -1,0 +1,71 @@
+<?php
+
+namespace App\Form;
+
+use App\Entity\Attack;
+use App\Entity\Type;
+use App\Repository\AttackRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+class FilterAttacksType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+        $builder
+            ->add('types',EntityType::class, [
+                'class' => Type::class,
+                'choice_label' => 'label',
+                'multiple' => true,
+                'expanded' => true,
+                'attr'=>[
+                    'class' => 'checkbox_content'
+                ]
+            ])
+            ->add('power',IntegerType::class,[
+                'label' => 'Power',
+                'required' => false,
+            ])
+            ->add('accuracy',IntegerType::class,[
+                'label' => 'Accuracy',
+                'required' => false,
+            ])
+            ->add('category', ChoiceType::class, [
+                'label' => 'Category',
+                'choices'  => [
+                    'None' => 'null',
+                    'Status' => 'Status',
+                    'Physical' => 'Physical',
+                    'Special' => 'Special',
+                ],
+            ])
+            ->add('makesContact', ChoiceType::class, [
+                'label' => 'Makes Contact ?',
+                'choices'  => [
+                    'None' => 'null',
+                    'Yes' => 'Yes',
+                    'No' => 'No',
+                ],
+            ])
+            ->add('submit', SubmitType::class, [
+                'label' => 'Submit',
+                'attr' => [
+                    'class' => 'btn btn-pokemon'
+            ]
+        ])
+        ;
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            // Configure your form options here
+        ]);
+    }
+}

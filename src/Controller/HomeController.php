@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\AttackRepository;
 use App\Repository\PokemonRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -15,16 +16,18 @@ class HomeController extends AbstractController
     private PokemonRepository $pokemonRepository;
     private PaginatorInterface $paginator;
     private EntityManagerInterface $em;
-
+    private AttackRepository $attackRepository;
 
     public function __construct(
         PokemonRepository $pokemonRepository,
         PaginatorInterface $paginator,
         EntityManagerInterface $em,
+        AttackRepository $attackRepository
     ) {
         $this->pokemonRepository = $pokemonRepository;
         $this->paginator = $paginator;
         $this->em = $em;
+        $this->attackRepository = $attackRepository;
     }
 
     #[Route('/', name: 'app_home')]
@@ -48,8 +51,20 @@ class HomeController extends AbstractController
         public function getOnePokemonById(int $id): Response
         {
             $pokemonEntity = $this->pokemonRepository->find($id);
+            $attacksArray = $this->attackRepository->getAttacksByPokemonId($id);
             return $this->render('home/show.html.twig', [
                 'myPokemon' => $pokemonEntity,
+                'attacksArray' => $attacksArray,
             ]);
         }
+
+                // Récupérer un jeu avec son slug
+                #[Route('/Pokemon/{id}/attacks', name: 'show_more_pokemon')]
+                public function getOnePokemonByIdShowMore(int $id): Response
+                {
+                    $pokemonEntity = $this->pokemonRepository->find($id);
+                    return $this->render('home/showMore.html.twig', [
+                        'myPokemon' => $pokemonEntity,
+                    ]);
+                }
 }
