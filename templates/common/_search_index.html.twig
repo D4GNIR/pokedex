@@ -1,0 +1,23 @@
+<ul class="list-group ">
+    {% if pokemons|length == 0 and attacks|length == 0 %}
+        <li class="list-group-item">Aucun Résultat trouvé...</li>
+    {% else %}
+        {% if pokemons|length > 0 %}
+            <li class="list-group-item text-center">----Pokemon----</li>
+            {% for pokemonFound in pokemons %}
+                <a href="{{ path('show_pokemon', {'id': pokemonFound.id }) }}">
+                <li class="list-group-item list-group-item-action">{{ pokemonFound.Name }}</li>
+                </a>
+            {% endfor %}
+        {% endif %}
+
+        {% if attacks|length > 0 %}
+            <li class="list-group-item text-center">----Attack----</li>
+            {% for attackFound in attacks %}
+                <a href="{{ path('show_attack', {'id': attackFound.id }) }}">
+                <li class="list-group-item list-group-item-action">{{ attackFound.Label }}</li>
+                </a>
+            {% endfor %}
+        {% endif %}
+    {% endif %}
+</ul>

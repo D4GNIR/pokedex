@@ -7,6 +7,7 @@ use App\Repository\PokemonRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -58,13 +59,27 @@ class HomeController extends AbstractController
             ]);
         }
 
-                // Récupérer un jeu avec son slug
-                #[Route('/Pokemon/{id}/attacks', name: 'show_more_pokemon')]
-                public function getOnePokemonByIdShowMore(int $id): Response
-                {
-                    $pokemonEntity = $this->pokemonRepository->find($id);
-                    return $this->render('home/showMore.html.twig', [
-                        'myPokemon' => $pokemonEntity,
-                    ]);
-                }
+        // Récupérer un jeu avec son slug
+        #[Route('/Pokemon/{id}/attacks', name: 'show_more_pokemon')]
+        public function getOnePokemonByIdShowMore(int $id): Response
+        {
+            $pokemonEntity = $this->pokemonRepository->find($id);
+            return $this->render('home/showMore.html.twig', [
+                'myPokemon' => $pokemonEntity,
+            ]);
+        }
+
+        #[Route('/ajax/search_engine/{research}', name:'app_research')]
+        public function ajaxResearch($research): JsonResponse {
+    
+            $pokemonEntities = $this->pokemonRepository->getPokemonsByAjaxRequest($research);
+            $attackEntities = $this->attackRepository->getAttacksByAjaxRequest($research);
+    
+            return (new JsonResponse())->setData([
+                'html' => $this->renderView('common/_search_index.html.twig', [
+                'pokemons' => $pokemonEntities,
+                'attacks' => $attackEntities,
+                ]),
+            ]);
+        }
 }

@@ -86,10 +86,17 @@ class AttackRepository extends ServiceEntityRepository
                 ->setParameter('makesContact', '%'.$datas['makesContact'].'%');
             } 
 
-           
-
-
             return $qb;
+    }
+
+    public function getAttacksByAjaxRequest(string $research) {
+
+        return $this->createQueryBuilder('a')
+        ->where('a.Label LIKE :research')
+        ->setParameter('research' , '%'.$research.'%')
+        ->getQuery()
+        ->getResult()
+        ;
     }
 
 //    /**

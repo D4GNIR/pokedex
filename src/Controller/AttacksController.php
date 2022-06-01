@@ -46,4 +46,14 @@ class AttacksController extends AbstractController
             'form' => $formFilter->createView(),
         ]);
     }
+
+    #[Route('/attack/{id}', name: 'show_attack')]
+    public function getOneAttackById(int $id): Response
+    {
+        $attackEntity = $this->attackRepository->find($id);
+        return $this->render('attacks/show.html.twig', [
+            'myAttack' => $attackEntity,
+        ]);
+    }
+
 }

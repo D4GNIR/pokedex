@@ -45,6 +45,15 @@ class PokemonRepository extends ServiceEntityRepository
 
     }
     
+    public function getPokemonsByAjaxRequest(string $research) {
+
+        return $this->createQueryBuilder('p')
+        ->where('p.Name LIKE :research')
+        ->setParameter('research' , '%'.$research.'%')
+        ->getQuery()
+        ->getResult()
+        ;
+    }
 
 
 
